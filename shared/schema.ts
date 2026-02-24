@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, serial, integer, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, serial, integer, timestamp, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -62,3 +62,58 @@ export const insertContactSchema = createInsertSchema(contactSubmissions).omit({
 
 export type ContactSubmission = typeof contactSubmissions.$inferSelect;
 export type InsertContact = z.infer<typeof insertContactSchema>;
+
+export const newsletterSubscribers = pgTable("newsletter_subscribers", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  name: text("name"),
+  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+});
+
+export const insertNewsletterSchema = createInsertSchema(newsletterSubscribers).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
+export type InsertNewsletter = z.infer<typeof insertNewsletterSchema>;
+
+export const giftCards = pgTable("gift_cards", {
+  id: serial("id").primaryKey(),
+  code: text("code").notNull().unique(),
+  amount: integer("amount").notNull(),
+  recipientName: text("recipient_name").notNull(),
+  recipientEmail: text("recipient_email").notNull(),
+  senderName: text("sender_name").notNull(),
+  senderEmail: text("sender_email").notNull(),
+  personalMessage: text("personal_message"),
+  redeemed: boolean("redeemed").default(false).notNull(),
+  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+});
+
+export const insertGiftCardSchema = createInsertSchema(giftCards).omit({
+  id: true,
+  code: true,
+  redeemed: true,
+  createdAt: true,
+});
+
+export type GiftCard = typeof giftCards.$inferSelect;
+export type InsertGiftCard = z.infer<typeof insertGiftCardSchema>;
+
+export const reviews = pgTable("reviews", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  rating: integer("rating").notNull(),
+  comment: text("comment").notNull(),
+  service: text("service"),
+  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+});
+
+export const insertReviewSchema = createInsertSchema(reviews).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type Review = typeof reviews.$inferSelect;
+export type InsertReview = z.infer<typeof insertReviewSchema>;

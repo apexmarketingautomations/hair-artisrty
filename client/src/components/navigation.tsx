@@ -1,22 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Scissors } from "lucide-react";
+import { Menu, Scissors, Gift } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
+  { label: "Gift Cards", href: "/gift-cards" },
   { label: "Contact", href: "/contact" },
 ];
 
 export function Navigation() {
   const [location] = useLocation();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm" : "bg-transparent border-b border-transparent"}`}>
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
         <Link href="/">
           <div className="flex items-center gap-2 cursor-pointer" data-testid="link-logo">
@@ -30,11 +38,9 @@ export function Navigation() {
             <Link key={item.href} href={item.href}>
               <span
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${
-                  location === item.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                  location === item.href ? "text-primary" : "text-muted-foreground"
                 }`}
-                data-testid={`link-nav-${item.label.toLowerCase()}`}
+                data-testid={`link-nav-${item.label.toLowerCase().replace(" ", "-")}`}
               >
                 {item.label}
               </span>
@@ -65,12 +71,11 @@ export function Navigation() {
                   <span
                     onClick={() => setOpen(false)}
                     className={`block px-4 py-3 rounded-md text-sm font-medium cursor-pointer ${
-                      location === item.href
-                        ? "text-primary bg-primary/5"
-                        : "text-muted-foreground"
+                      location === item.href ? "text-primary bg-primary/5" : "text-muted-foreground"
                     }`}
-                    data-testid={`link-mobile-${item.label.toLowerCase()}`}
+                    data-testid={`link-mobile-${item.label.toLowerCase().replace(" ", "-")}`}
                   >
+                    {item.label === "Gift Cards" && <Gift className="w-4 h-4 inline mr-2" />}
                     {item.label}
                   </span>
                 </Link>
