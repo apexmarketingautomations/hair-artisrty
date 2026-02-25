@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Heart, Award, Users, Star, Sparkles, MapPin, Phone, Scissors, Crown, ExternalLink, ArrowRight } from "lucide-react";
 import { SiInstagram } from "react-icons/si";
-import teamGroupImg from "@assets/Screenshot_2026-02-24_at_7.33.29_PM_1771979613529.png";
-import founderImg from "@assets/Screenshot_2026-02-24_at_7.33.41_PM_1771979625053.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -21,7 +19,7 @@ const teamMembers = [
     phone: "(239) 677-9902",
     instagram: "shhmoneycurl",
     gradient: "from-amber-500 to-rose-500",
-    initial: "NC",
+    image: "/images/nakisha-profile.jpg",
   },
   {
     name: "Michael",
@@ -31,7 +29,7 @@ const teamMembers = [
     phone: "(239) 277-9494",
     instagram: null,
     gradient: "from-violet-500 to-indigo-500",
-    initial: "M",
+    image: "/images/team-member-4.jpg",
   },
   {
     name: "Jessie",
@@ -41,7 +39,7 @@ const teamMembers = [
     phone: "(239) 244-6902",
     instagram: null,
     gradient: "from-rose-500 to-pink-500",
-    initial: "J",
+    image: "/images/team-member-9.jpg",
   },
   {
     name: "Jenae",
@@ -51,7 +49,7 @@ const teamMembers = [
     phone: "(309) 336-4440",
     instagram: null,
     gradient: "from-teal-500 to-emerald-500",
-    initial: "JN",
+    image: "/images/team-member-5.jpg",
   },
   {
     name: "Hayley",
@@ -61,7 +59,7 @@ const teamMembers = [
     phone: "(239) 738-1661",
     instagram: null,
     gradient: "from-amber-400 to-orange-500",
-    initial: "H",
+    image: "/images/team-member-8.jpg",
   },
 ];
 
@@ -70,7 +68,7 @@ export default function About() {
     <div className="min-h-screen">
       <section className="relative py-32 px-4 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={teamGroupImg} alt="The Hair Artistry Dream Team" className="w-full h-full object-cover object-top" />
+          <img src="/images/team-group.jpg" alt="The Hair Artistry Dream Team" className="w-full h-full object-cover object-center" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
           <div className="absolute inset-0 bg-gradient-to-r from-amber-900/20 via-rose-900/10 to-violet-900/15" />
         </div>
@@ -88,7 +86,7 @@ export default function About() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div variants={fadeUp} custom={0} className="relative">
               <div className="relative overflow-hidden rounded-lg">
-                <img src={founderImg} alt="Nakisha ShhmoneyCurl Camacho, Founder of Hair Artistry" className="w-full object-cover object-top aspect-[4/5]" />
+                <img src="/images/founder-nakisha.jpg" alt="Nakisha ShhmoneyCurl Camacho, Founder of Hair Artistry" className="w-full object-cover object-top aspect-[4/5]" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
                   <p className="text-amber-200 text-xs tracking-[0.2em] uppercase font-semibold">Founder</p>
                   <p className="text-white font-serif text-xl">Nakisha Camacho</p>
@@ -167,9 +165,7 @@ export default function About() {
                 <div className={`h-1.5 bg-gradient-to-r ${member.gradient}`} />
                 <div className="p-6">
                   <div className="flex items-start gap-4 mb-4">
-                    <div className={`shrink-0 w-14 h-14 rounded-full bg-gradient-to-br ${member.gradient} flex items-center justify-center text-white font-bold text-lg`}>
-                      {member.initial}
-                    </div>
+                    <img src={member.image} alt={member.name} className="shrink-0 w-14 h-14 rounded-full object-cover object-top border-2 border-border" />
                     <div className="min-w-0">
                       <h3 className="font-serif text-lg leading-tight">{member.name}</h3>
                       {member.aka && <p className="text-primary text-xs font-semibold">"{member.aka}"</p>}
