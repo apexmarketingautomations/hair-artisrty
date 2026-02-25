@@ -158,6 +158,21 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     }
   });
 
+  app.get("/api/admin/leads", async (_req, res) => {
+    try {
+      const [newsletter, contacts, referrals, memberships, giftCards] = await Promise.all([
+        storage.getAllNewsletterSubscribers(),
+        storage.getAllContactSubmissions(),
+        storage.getAllReferrals(),
+        storage.getAllMemberships(),
+        storage.getAllGiftCards(),
+      ]);
+      res.json({ newsletter, contacts, referrals, memberships, giftCards });
+    } catch {
+      res.status(500).json({ error: "Failed to fetch leads" });
+    }
+  });
+
   app.get("/api/gallery", async (req, res) => {
     try {
       const category = req.query.category as string | undefined;

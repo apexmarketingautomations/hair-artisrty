@@ -21,6 +21,7 @@ A cutting-edge 2026 demo clone of hairartistrysalon.biz (Hair Artistry Full Serv
 - **/memberships** - Membership Plans: 3 tiers (Essential $59, Premium $99, VIP $149), signup form, FAQ accordion
 - **/gallery** - Public Gallery: filterable grid (photos, videos, links), lightbox viewer, video embeds (YouTube/Instagram/TikTok), empty state messaging
 - **/admin/gallery** - Admin Content Manager: add/edit/delete gallery items, image upload (base64) or URL, video URL support, category/sort/featured controls
+- **/admin/leads** - Prospect Leads Dashboard: unified view of all captured leads (newsletter, contact forms, referrals, memberships, gift cards), search/filter by source, expandable detail cards with email/call actions, CSV export
 
 ## Features
 - AI chat widget on all pages (GPT-4o streaming via SSE)

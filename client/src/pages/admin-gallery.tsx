@@ -158,6 +158,11 @@ export default function AdminGallery() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Link href="/admin/leads">
+              <Button variant="outline" size="sm" data-testid="button-go-leads">
+                Prospect Leads
+              </Button>
+            </Link>
             <Link href="/gallery">
               <Button variant="outline" size="sm" data-testid="button-view-gallery">
                 <Eye className="w-3.5 h-3.5 mr-1.5" /> View Gallery

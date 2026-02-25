@@ -17,6 +17,7 @@ import Shop from "@/pages/shop";
 import Memberships from "@/pages/memberships";
 import Gallery from "@/pages/gallery";
 import AdminGallery from "@/pages/admin-gallery";
+import AdminLeads from "@/pages/admin-leads";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/memberships" component={Memberships} />
       <Route path="/gallery" component={Gallery} />
       <Route path="/admin/gallery" component={AdminGallery} />
+      <Route path="/admin/leads" component={AdminLeads} />
       <Route component={NotFound} />
     </Switch>
   );

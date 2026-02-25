@@ -30,6 +30,11 @@ export interface IStorage {
   getReferralByCode(code: string): Promise<Referral | undefined>;
   redeemReferral(code: string, referredEmail: string, referredName: string): Promise<Referral | undefined>;
   createMembership(data: InsertMembership): Promise<Membership>;
+  getAllNewsletterSubscribers(): Promise<NewsletterSubscriber[]>;
+  getAllContactSubmissions(): Promise<ContactSubmission[]>;
+  getAllReferrals(): Promise<Referral[]>;
+  getAllMemberships(): Promise<Membership[]>;
+  getAllGiftCards(): Promise<GiftCard[]>;
   getAllGalleryItems(): Promise<GalleryItem[]>;
   getGalleryItemsByCategory(category: string): Promise<GalleryItem[]>;
   createGalleryItem(data: InsertGalleryItem): Promise<GalleryItem>;
@@ -119,6 +124,21 @@ export class DatabaseStorage implements IStorage {
   async createMembership(data: InsertMembership) {
     const [m] = await db.insert(memberships).values(data).returning();
     return m;
+  }
+  async getAllNewsletterSubscribers() {
+    return db.select().from(newsletterSubscribers).orderBy(desc(newsletterSubscribers.createdAt));
+  }
+  async getAllContactSubmissions() {
+    return db.select().from(contactSubmissions).orderBy(desc(contactSubmissions.createdAt));
+  }
+  async getAllReferrals() {
+    return db.select().from(referrals).orderBy(desc(referrals.createdAt));
+  }
+  async getAllMemberships() {
+    return db.select().from(memberships).orderBy(desc(memberships.createdAt));
+  }
+  async getAllGiftCards() {
+    return db.select().from(giftCards).orderBy(desc(giftCards.createdAt));
   }
   async getAllGalleryItems() {
     return db.select().from(galleryItems).orderBy(desc(galleryItems.featured), galleryItems.sortOrder, desc(galleryItems.createdAt));
