@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Scissors, Phone, MapPin, Clock, Gift, ArrowRight } from "lucide-react";
+import { Scissors, Phone, MapPin, Clock, Gift, ArrowRight, Crown, Users, ShoppingBag } from "lucide-react";
 import { SiInstagram, SiFacebook } from "react-icons/si";
 
 export function Footer() {
@@ -32,11 +32,14 @@ export function Footer() {
                 { label: "Home", href: "/" },
                 { label: "About", href: "/about" },
                 { label: "Services", href: "/services" },
+                { label: "Shop", href: "/shop" },
+                { label: "Memberships", href: "/memberships" },
                 { label: "Gift Cards", href: "/gift-cards" },
+                { label: "Refer a Friend", href: "/referrals" },
                 { label: "Contact", href: "/contact" },
               ].map((link) => (
                 <Link key={link.href} href={link.href}>
-                  <span className="flex items-center gap-1 text-sm text-muted-foreground cursor-pointer py-1 hover:text-primary transition-colors" data-testid={`link-footer-${link.label.toLowerCase().replace(" ", "-")}`}>
+                  <span className="flex items-center gap-1 text-sm text-muted-foreground cursor-pointer py-1 hover:text-primary transition-colors" data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}>
                     <ArrowRight className="w-3 h-3" /> {link.label}
                   </span>
                 </Link>
@@ -65,14 +68,30 @@ export function Footer() {
             </div>
           </div>
 
-          <div>
-            <h3 className="font-serif text-base font-semibold mb-4">Gift Cards</h3>
-            <p className="text-muted-foreground text-sm mb-4">Give the perfect gift of beautiful hair. E-Gift cards available now.</p>
-            <Link href="/gift-cards">
-              <span className="inline-flex items-center gap-1 text-primary text-sm font-medium cursor-pointer">
-                <Gift className="w-4 h-4" /> Shop Gift Cards
-              </span>
-            </Link>
+          <div className="space-y-6">
+            <div>
+              <h3 className="font-serif text-base font-semibold mb-3 flex items-center gap-2">
+                <Crown className="w-4 h-4 text-primary" /> Memberships
+              </h3>
+              <p className="text-muted-foreground text-sm mb-3">Save every month with exclusive member perks, priority booking, and discounts starting at $59/mo.</p>
+              <Link href="/memberships">
+                <span className="inline-flex items-center gap-1 text-primary text-sm font-medium cursor-pointer" data-testid="link-footer-memberships-cta">
+                  <Crown className="w-4 h-4" /> View Plans
+                </span>
+              </Link>
+            </div>
+
+            <div>
+              <h3 className="font-serif text-base font-semibold mb-3 flex items-center gap-2">
+                <Users className="w-4 h-4 text-primary" /> Refer & Save
+              </h3>
+              <p className="text-muted-foreground text-sm mb-3">You and your friend both get $10 off when they book their first visit.</p>
+              <Link href="/referrals">
+                <span className="inline-flex items-center gap-1 text-primary text-sm font-medium cursor-pointer" data-testid="link-footer-referrals-cta">
+                  <Users className="w-4 h-4" /> Start Referring
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

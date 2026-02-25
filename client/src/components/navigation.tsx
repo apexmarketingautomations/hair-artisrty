@@ -2,13 +2,15 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Scissors, Gift } from "lucide-react";
+import { Menu, Scissors, Gift, ShoppingBag, Crown, Users } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
+  { label: "Shop", href: "/shop" },
+  { label: "Memberships", href: "/memberships" },
   { label: "Gift Cards", href: "/gift-cards" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -25,7 +27,7 @@ export function Navigation() {
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm" : "bg-transparent border-b border-transparent"}`}>
-      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
         <Link href="/">
           <div className="flex items-center gap-2 cursor-pointer" data-testid="link-logo">
             <Scissors className="w-5 h-5 text-primary" />
@@ -33,11 +35,11 @@ export function Navigation() {
           </div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1" data-testid="nav-desktop">
+        <nav className="hidden lg:flex items-center gap-0.5" data-testid="nav-desktop">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href}>
               <span
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${
+                className={`px-2.5 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${
                   location === item.href ? "text-primary" : "text-muted-foreground"
                 }`}
                 data-testid={`link-nav-${item.label.toLowerCase().replace(" ", "-")}`}
@@ -46,6 +48,11 @@ export function Navigation() {
               </span>
             </Link>
           ))}
+          <Link href="/referrals">
+            <span className={`px-2.5 py-1.5 rounded-full text-xs font-bold transition-colors cursor-pointer bg-gradient-to-r from-primary/10 to-rose-500/10 border border-primary/20 ${location === "/referrals" ? "text-primary" : "text-primary/80"}`} data-testid="link-nav-refer">
+              Refer & Save
+            </span>
+          </Link>
           <a
             href="https://square.site/book/A0RGDZPMGHG28/hair-artistry-full-service-salon-cape-coral-fl"
             target="_blank"
@@ -59,7 +66,7 @@ export function Navigation() {
         </nav>
 
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild className="md:hidden">
+          <SheetTrigger asChild className="lg:hidden">
             <Button size="icon" variant="ghost" data-testid="button-mobile-menu">
               <Menu className="w-5 h-5" />
             </Button>
@@ -76,10 +83,22 @@ export function Navigation() {
                     data-testid={`link-mobile-${item.label.toLowerCase().replace(" ", "-")}`}
                   >
                     {item.label === "Gift Cards" && <Gift className="w-4 h-4 inline mr-2" />}
+                    {item.label === "Shop" && <ShoppingBag className="w-4 h-4 inline mr-2" />}
+                    {item.label === "Memberships" && <Crown className="w-4 h-4 inline mr-2" />}
                     {item.label}
                   </span>
                 </Link>
               ))}
+              <Link href="/referrals">
+                <span
+                  onClick={() => setOpen(false)}
+                  className="block px-4 py-3 rounded-md text-sm font-medium cursor-pointer text-primary bg-gradient-to-r from-primary/5 to-rose-500/5"
+                  data-testid="link-mobile-refer"
+                >
+                  <Users className="w-4 h-4 inline mr-2" />
+                  Refer & Save $10
+                </span>
+              </Link>
               <a
                 href="https://square.site/book/A0RGDZPMGHG28/hair-artistry-full-service-salon-cape-coral-fl"
                 target="_blank"

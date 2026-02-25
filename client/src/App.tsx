@@ -6,11 +6,15 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { AiChatWidget } from "@/components/ai-chat";
+import EmailPopup from "@/components/email-popup";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Services from "@/pages/services";
 import Contact from "@/pages/contact";
 import GiftCards from "@/pages/gift-cards";
+import Referrals from "@/pages/referrals";
+import Shop from "@/pages/shop";
+import Memberships from "@/pages/memberships";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -21,6 +25,9 @@ function Router() {
       <Route path="/services" component={Services} />
       <Route path="/contact" component={Contact} />
       <Route path="/gift-cards" component={GiftCards} />
+      <Route path="/referrals" component={Referrals} />
+      <Route path="/shop" component={Shop} />
+      <Route path="/memberships" component={Memberships} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -37,6 +44,7 @@ function App() {
           </main>
           <Footer />
           <AiChatWidget />
+          <EmailPopup />
         </div>
         <Toaster />
       </TooltipProvider>

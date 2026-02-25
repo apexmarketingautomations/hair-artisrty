@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Scissors, Palette, Sparkles, Crown, Flower2, Heart, Waves, Droplets, Star, ArrowRight } from "lucide-react";
+import ServiceUpsell from "@/components/service-upsell";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -123,7 +124,9 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="py-24 px-4 bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900">
+      <ServiceUpsell />
+
+      <section className="py-24 px-4 bg-gradient-to-br from-stone-900 via-rose-900/80 to-violet-900">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.div variants={fadeUp} custom={0} className="flex justify-center mb-4">

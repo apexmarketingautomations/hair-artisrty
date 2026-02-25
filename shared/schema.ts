@@ -117,3 +117,45 @@ export const insertReviewSchema = createInsertSchema(reviews).omit({
 
 export type Review = typeof reviews.$inferSelect;
 export type InsertReview = z.infer<typeof insertReviewSchema>;
+
+export const referrals = pgTable("referrals", {
+  id: serial("id").primaryKey(),
+  referrerEmail: text("referrer_email").notNull(),
+  referrerName: text("referrer_name").notNull(),
+  referralCode: text("referral_code").notNull().unique(),
+  referredEmail: text("referred_email"),
+  referredName: text("referred_name"),
+  redeemed: boolean("redeemed").default(false).notNull(),
+  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+});
+
+export const insertReferralSchema = createInsertSchema(referrals).omit({
+  id: true,
+  referralCode: true,
+  referredEmail: true,
+  referredName: true,
+  redeemed: true,
+  createdAt: true,
+});
+
+export type Referral = typeof referrals.$inferSelect;
+export type InsertReferral = z.infer<typeof insertReferralSchema>;
+
+export const memberships = pgTable("memberships", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  plan: text("plan").notNull(),
+  status: text("status").default("pending").notNull(),
+  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+});
+
+export const insertMembershipSchema = createInsertSchema(memberships).omit({
+  id: true,
+  status: true,
+  createdAt: true,
+});
+
+export type Membership = typeof memberships.$inferSelect;
+export type InsertMembership = z.infer<typeof insertMembershipSchema>;

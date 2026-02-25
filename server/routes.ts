@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactSchema, insertNewsletterSchema, insertGiftCardSchema, insertReviewSchema } from "@shared/schema";
+import { insertContactSchema, insertNewsletterSchema, insertGiftCardSchema, insertReviewSchema, insertReferralSchema, insertMembershipSchema } from "@shared/schema";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -15,22 +15,37 @@ Hours: Tuesday-Friday 10am-7pm, Saturday 9am-6pm, Sunday-Monday Closed.
 
 About: Hair Artistry is a full service salon where you're not just a client, you're family! Certified specialists in curly hair, extensions, braiding, natural hair styles, fades, and blending. All new clients receive $10 off their first visit.
 
-Specialties:
+Services:
 - CAMACHO CURLY CUT: Signature dry + wet technique for every curl type
-- BALAYAGE: Hand-painted highlights for effortless glow
+- BALAYAGE & HIGHLIGHTS: Hand-painted highlights for effortless glow
+- BLONDING: Bold highlights, dimensional blends, color corrections
 - MEN'S GROOMING: Scissor cuts, fades, straight razor shaves with hot towel
 - KIDS' CUTS: Fresh styles for little ones
 - BRAIDS & INSTALLS: Knotless braids, wig installs, custom units, extensions (hand-tied, sew-in, tape-ins)
 - WAXING: Brows, lips, chins, sideburns
-- BLONDING: Bold highlights, dimensional blends, color corrections
 - BRIDAL: In salon or travel to you
 - SCALP THERAPY: Luxe 1-hour treatment with massage, masks, facial, blowout
+- COLOR CORRECTIONS: Expert fix for unwanted tones, banding, damage
 
-Gift Cards: Available on our website in amounts of $25, $50, $75, $100, and $150. Perfect for any occasion!
+Premium Add-Ons:
+- Deep Conditioning Treatment (+$25)
+- Scalp Massage Add-On (+$15)
+- Olaplex Bond Treatment (+$35)
+
+Gift Cards: Available on our website ($25, $50, $75, $100, $150). Perfect for any occasion!
+
+Membership Plans (monthly):
+- Essential ($59/mo): 1 blowout/month, 10% off services, priority booking
+- Premium ($99/mo): 1 blowout + 1 treatment/month, 15% off services, priority booking, free waxing
+- VIP ($149/mo): 2 blowouts + 1 treatment/month, 20% off services, priority booking, free waxing, quarterly scalp therapy
+
+Referral Program: Share your unique referral link - when a friend books, BOTH get $10 off!
+
+Shop: We recommend professional hair products on our website including Olaplex, DevaCurl, Moroccan Oil, Redken, and more.
 
 Booking: https://square.site/book/A0RGDZPMGHG28/hair-artistry-full-service-salon-cape-coral-fl
 
-You are a warm, knowledgeable AI concierge. Help with service questions, recommendations, booking info, and hair care tips. Keep responses concise but personable. Use a warm, welcoming tone. When recommending services, be specific about what would work for the client's needs.`;
+You are a warm, knowledgeable AI concierge. Help with service questions, recommendations, booking info, memberships, referrals, gift cards, and hair care tips. Keep responses concise but personable. Use a warm, welcoming tone. Actively suggest relevant upsells, memberships, and referral program when appropriate.`;
 
 export async function registerRoutes(httpServer: Server, app: Express): Promise<Server> {
   await storage.seedReviews();
@@ -96,6 +111,50 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
       res.status(201).json(review);
     } catch (error) {
       res.status(500).json({ error: "Failed to submit review" });
+    }
+  });
+
+  app.post("/api/referrals", async (req, res) => {
+    try {
+      const parsed = insertReferralSchema.safeParse(req.body);
+      if (!parsed.success) return res.status(400).json({ error: "Invalid referral data" });
+      const referral = await storage.createReferral(parsed.data);
+      res.status(201).json(referral);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to create referral" });
+    }
+  });
+
+  app.get("/api/referrals/:code", async (req, res) => {
+    try {
+      const referral = await storage.getReferralByCode(req.params.code);
+      if (!referral) return res.status(404).json({ error: "Referral not found" });
+      res.json(referral);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to lookup referral" });
+    }
+  });
+
+  app.post("/api/referrals/:code/redeem", async (req, res) => {
+    try {
+      const { referredEmail, referredName } = req.body;
+      if (!referredEmail || !referredName) return res.status(400).json({ error: "Name and email required" });
+      const referral = await storage.redeemReferral(req.params.code, referredEmail, referredName);
+      if (!referral) return res.status(404).json({ error: "Referral not found" });
+      res.json(referral);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to redeem referral" });
+    }
+  });
+
+  app.post("/api/memberships", async (req, res) => {
+    try {
+      const parsed = insertMembershipSchema.safeParse(req.body);
+      if (!parsed.success) return res.status(400).json({ error: "Invalid membership data" });
+      const membership = await storage.createMembership(parsed.data);
+      res.status(201).json(membership);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to create membership" });
     }
   });
 

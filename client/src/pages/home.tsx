@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Scissors, Palette, Sparkles, ArrowRight, Star, Gift, ChevronRight, Zap, Crown, Waves } from "lucide-react";
+import { Scissors, Palette, Sparkles, ArrowRight, Star, Gift, ChevronRight, Zap, Crown, Waves, ExternalLink } from "lucide-react";
 import type { Review } from "@shared/schema";
 
 const fadeUp = {
@@ -22,7 +23,7 @@ export default function Home() {
           <img src="/images/hero-salon.jpg" alt="Hair Artistry Salon" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-900/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-amber-900/20 via-rose-900/10 to-violet-900/15" />
 
         <motion.div
           initial="hidden"
@@ -164,13 +165,39 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-14">
               <motion.p variants={fadeUp} custom={0} className="text-primary tracking-[0.2em] uppercase text-xs mb-3 font-semibold">Testimonials</motion.p>
-              <motion.h2 variants={fadeUp} custom={1} className="text-4xl md:text-5xl font-serif" data-testid="text-reviews-heading">
+              <motion.h2 variants={fadeUp} custom={1} className="text-4xl md:text-5xl font-serif mb-6" data-testid="text-reviews-heading">
                 What Our <span className="italic">Family</span> Says
               </motion.h2>
+              <motion.div variants={fadeUp} custom={2} className="inline-flex flex-col items-center gap-2" data-testid="badge-google-reviews">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card">
+                  <div className="flex items-center gap-0.5">
+                    <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                  </div>
+                  <span className="font-bold text-sm">4.9</span>
+                  <span className="text-muted-foreground text-xs">stars</span>
+                </div>
+                <span className="text-muted-foreground text-xs">Based on Google Reviews</span>
+              </motion.div>
             </motion.div>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid md:grid-cols-3 gap-6">
-              {reviews.slice(0, 3).map((review, i) => (
-                <motion.div key={review.id} variants={fadeUp} custom={i} className="p-6 rounded-md border border-border bg-card hover-elevate" data-testid={`card-review-${i}`}>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={stagger}
+              className="flex gap-5 overflow-x-auto pb-4 no-scrollbar snap-x snap-mandatory"
+            >
+              {reviews.map((review, i) => (
+                <motion.div
+                  key={review.id}
+                  variants={fadeUp}
+                  custom={i}
+                  className="shrink-0 w-80 p-6 rounded-md border border-border bg-card hover-elevate snap-start"
+                  data-testid={`card-review-${i}`}
+                >
                   <div className="flex gap-0.5 mb-3">
                     {Array.from({ length: review.rating }).map((_, j) => (
                       <Star key={j} className="w-4 h-4 fill-amber-400 text-amber-400" />
@@ -184,11 +211,25 @@ export default function Home() {
                 </motion.div>
               ))}
             </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={0}
+              className="text-center mt-8"
+            >
+              <a href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" data-testid="button-leave-review">
+                  <ExternalLink className="w-4 h-4 mr-2" /> Leave a Review
+                </Button>
+              </a>
+            </motion.div>
           </div>
         </section>
       )}
 
-      <section className="py-24 px-4 bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900 relative overflow-hidden">
+      <section className="py-24 px-4 bg-gradient-to-br from-violet-950 via-rose-950 to-amber-900 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4a574' fill-opacity='0.3'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2V0h2v20h2V0h2v20h2V0h2v20h2V0h2v22H20v-1.5zM0 20h2v20H0V20zm4 0h2v20H4V20zm4 0h2v20H8V20zm4 0h2v20h-2V20zm4 0h2v20h-2V20z'/%3E%3C/g%3E%3C/svg%3E")`,
         }} />
@@ -305,5 +346,3 @@ function NewsletterSignup() {
     </div>
   );
 }
-
-import { useState } from "react";
