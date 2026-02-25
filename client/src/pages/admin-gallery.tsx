@@ -9,7 +9,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Trash2, Star, Image, Video, Link2, Upload, Eye, ArrowLeft, Pencil, Check, X } from "lucide-react";
+import { Plus, Trash2, Star, Image, Video, Link2, Upload, Eye, ArrowLeft, Pencil, Check, X, LogOut } from "lucide-react";
+import { useAdminAuth } from "@/hooks/use-admin-auth";
 import { Link } from "wouter";
 import type { GalleryItem } from "@shared/schema";
 
@@ -20,6 +21,7 @@ const fadeUp = {
 
 export default function AdminGallery() {
   const { toast } = useToast();
+  const { admin, logout } = useAdminAuth();
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
 
@@ -173,6 +175,9 @@ export default function AdminGallery() {
                 <Plus className="w-3.5 h-3.5 mr-1.5" /> Add Content
               </Button>
             )}
+            <Button variant="ghost" size="sm" onClick={() => logout().then(() => window.location.href = "/admin/login")} data-testid="button-logout">
+              <LogOut className="w-3.5 h-3.5 mr-1.5" /> Logout
+            </Button>
           </div>
         </div>
       </div>

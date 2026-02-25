@@ -1,8 +1,25 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema, insertNewsletterSchema, insertGiftCardSchema, insertReviewSchema, insertReferralSchema, insertMembershipSchema, insertGalleryItemSchema } from "@shared/schema";
 import OpenAI from "openai";
+
+declare module "express-session" {
+  interface SessionData {
+    adminAuth: boolean;
+    adminName: string;
+  }
+}
+
+const ADMIN_USERNAME = "nakisha";
+const ADMIN_PASSWORD = "HairArtistry2026!";
+
+function requireAdmin(req: Request, res: Response, next: NextFunction) {
+  if (req.session?.adminAuth) {
+    return next();
+  }
+  res.status(401).json({ error: "Unauthorized" });
+}
 
 const openai = new OpenAI({
   apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
@@ -49,6 +66,34 @@ You are a warm, knowledgeable AI concierge. Help with service questions, recomme
 
 export async function registerRoutes(httpServer: Server, app: Express): Promise<Server> {
   await storage.seedReviews();
+
+  app.post("/api/admin/login", (req, res) => {
+    const { username, password } = req.body;
+    if (
+      username?.toLowerCase() === ADMIN_USERNAME &&
+      password === ADMIN_PASSWORD
+    ) {
+      req.session.adminAuth = true;
+      req.session.adminName = "Nakisha";
+      res.json({ success: true, name: "Nakisha" });
+    } else {
+      res.status(401).json({ error: "Invalid credentials" });
+    }
+  });
+
+  app.post("/api/admin/logout", (req, res) => {
+    req.session.destroy(() => {
+      res.json({ success: true });
+    });
+  });
+
+  app.get("/api/admin/me", (req, res) => {
+    if (req.session?.adminAuth) {
+      res.json({ authenticated: true, name: req.session.adminName });
+    } else {
+      res.status(401).json({ authenticated: false });
+    }
+  });
 
   app.post("/api/contact", async (req, res) => {
     try {
@@ -158,7 +203,7 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     }
   });
 
-  app.get("/api/admin/leads", async (_req, res) => {
+  app.get("/api/admin/leads", requireAdmin, async (_req, res) => {
     try {
       const [newsletter, contacts, referrals, memberships, giftCards] = await Promise.all([
         storage.getAllNewsletterSubscribers(),
@@ -185,7 +230,7 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     }
   });
 
-  app.post("/api/gallery", async (req, res) => {
+  app.post("/api/gallery", requireAdmin, async (req, res) => {
     try {
       const parsed = insertGalleryItemSchema.safeParse(req.body);
       if (!parsed.success) return res.status(400).json({ error: "Invalid gallery data", details: parsed.error.issues });
@@ -196,7 +241,7 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     }
   });
 
-  app.patch("/api/gallery/:id", async (req, res) => {
+  app.patch("/api/gallery/:id", requireAdmin, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       const item = await storage.updateGalleryItem(id, req.body);
@@ -207,7 +252,7 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     }
   });
 
-  app.delete("/api/gallery/:id", async (req, res) => {
+  app.delete("/api/gallery/:id", requireAdmin, async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       await storage.deleteGalleryItem(id);

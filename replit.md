@@ -23,6 +23,13 @@ A cutting-edge 2026 demo clone of hairartistrysalon.biz (Hair Artistry Full Serv
 - **/admin/gallery** - Admin Content Manager: add/edit/delete gallery items, image upload (base64) or URL, video URL support, category/sort/featured controls
 - **/admin/leads** - Prospect Leads Dashboard: unified view of all captured leads (newsletter, contact forms, referrals, memberships, gift cards), search/filter by source, expandable detail cards with email/call actions, CSV export
 
+## Admin Auth
+- Session-based authentication using express-session + connect-pg-simple (sessions stored in PostgreSQL)
+- Login: username `nakisha`, password `HairArtistry2026!`
+- Admin routes protected by `requireAdmin` middleware (POST/PATCH/DELETE /api/gallery, GET /api/admin/leads)
+- Login page at `/admin/login`, auto-redirects from admin pages when not authenticated
+- Sessions last 7 days
+
 ## Features
 - AI chat widget on all pages (GPT-4o streaming via SSE)
 - Real salon images (hero-salon.jpg, stylist-1/2/3.jpg + 7 stock images + team photos in client/public/images/)

@@ -8,9 +8,10 @@ import { Input } from "@/components/ui/input";
 import {
   Users, Mail, Phone, MessageSquare, Gift, Crown, UserPlus,
   ArrowLeft, Search, Download, ExternalLink, Calendar, TrendingUp,
-  MailOpen, UserCheck, DollarSign
+  MailOpen, UserCheck, DollarSign, LogOut
 } from "lucide-react";
 import { Link } from "wouter";
+import { useAdminAuth } from "@/hooks/use-admin-auth";
 import type { NewsletterSubscriber, ContactSubmission, Referral, Membership, GiftCard } from "@shared/schema";
 
 const fadeUp = {
@@ -169,6 +170,7 @@ export default function AdminLeads() {
   const [activeTab, setActiveTab] = useState<TabType>("all");
   const [search, setSearch] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const { admin, logout } = useAdminAuth();
 
   const { data, isLoading } = useQuery<LeadsData>({
     queryKey: ["/api/admin/leads"],
@@ -218,7 +220,7 @@ export default function AdminLeads() {
             </Link>
             <div>
               <h1 className="font-serif text-xl font-semibold" data-testid="text-leads-title">Prospect Leads</h1>
-              <p className="text-muted-foreground text-xs">All captured leads from your website in one place</p>
+              <p className="text-muted-foreground text-xs">Welcome back, {admin?.name || "Admin"}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -229,6 +231,9 @@ export default function AdminLeads() {
             </Link>
             <Button variant="outline" size="sm" onClick={() => exportCSV(filtered)} disabled={filtered.length === 0} data-testid="button-export-csv">
               <Download className="w-3.5 h-3.5 mr-1.5" /> Export CSV
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => logout().then(() => window.location.href = "/admin/login")} data-testid="button-logout">
+              <LogOut className="w-3.5 h-3.5 mr-1.5" /> Logout
             </Button>
           </div>
         </div>

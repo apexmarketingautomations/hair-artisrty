@@ -18,6 +18,8 @@ import Memberships from "@/pages/memberships";
 import Gallery from "@/pages/gallery";
 import AdminGallery from "@/pages/admin-gallery";
 import AdminLeads from "@/pages/admin-leads";
+import AdminLogin from "@/pages/admin-login";
+import AdminGuard from "@/components/admin-guard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -32,8 +34,13 @@ function Router() {
       <Route path="/shop" component={Shop} />
       <Route path="/memberships" component={Memberships} />
       <Route path="/gallery" component={Gallery} />
-      <Route path="/admin/gallery" component={AdminGallery} />
-      <Route path="/admin/leads" component={AdminLeads} />
+      <Route path="/admin/login" component={AdminLogin} />
+      <Route path="/admin/gallery">
+        <AdminGuard><AdminGallery /></AdminGuard>
+      </Route>
+      <Route path="/admin/leads">
+        <AdminGuard><AdminLeads /></AdminGuard>
+      </Route>
       <Route component={NotFound} />
     </Switch>
   );
