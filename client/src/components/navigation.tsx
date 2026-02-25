@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Scissors, Gift, ShoppingBag, Crown, Users, Camera } from "lucide-react";
+import { Menu, Scissors, Gift, ShoppingBag, Crown, Users, Camera, Lock } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -54,6 +54,11 @@ export function Navigation() {
               Refer & Save
             </span>
           </Link>
+          <Link href="/admin/login">
+            <span className="px-2 py-1.5 rounded-md text-xs font-medium transition-colors cursor-pointer text-muted-foreground/50 hover:text-primary" data-testid="link-nav-admin">
+              <Lock className="w-3 h-3 inline mr-1" />Admin
+            </span>
+          </Link>
           <a
             href="https://square.site/book/A0RGDZPMGHG28/hair-artistry-full-service-salon-cape-coral-fl"
             target="_blank"
@@ -99,6 +104,16 @@ export function Navigation() {
                 >
                   <Users className="w-4 h-4 inline mr-2" />
                   Refer & Save $10
+                </span>
+              </Link>
+              <Link href="/admin/login">
+                <span
+                  onClick={() => setOpen(false)}
+                  className="block px-4 py-3 rounded-md text-sm font-medium cursor-pointer text-muted-foreground/50"
+                  data-testid="link-mobile-admin"
+                >
+                  <Lock className="w-4 h-4 inline mr-2" />
+                  Admin Login
                 </span>
               </Link>
               <a
