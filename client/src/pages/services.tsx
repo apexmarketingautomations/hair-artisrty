@@ -13,16 +13,16 @@ const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 type Category = "all" | "cuts" | "color" | "braids" | "specialty";
 
 const services = [
-  { icon: Scissors, title: "The Camacho Curly Cut", description: "Our signature dry + wet technique tailored for every curl type. Precision cutting that respects your natural curl pattern for shape, volume, and movement.", tag: "Signature", category: "cuts" as Category, image: "/images/stylist-1.jpg" },
-  { icon: Palette, title: "Balayage & Highlights", description: "Soft, hand-painted highlights for that effortless, sun-kissed glow. Custom placement for a natural, dimensional finish that grows out beautifully.", tag: "Popular", category: "color" as Category, image: "/images/stylist-2.jpg" },
-  { icon: Sparkles, title: "Blonding Services", description: "From bold, bright blondes to dimensional blends and color corrections. Stunning results while maintaining hair integrity.", tag: null, category: "color" as Category, image: "/images/stylist-3.jpg" },
-  { icon: Crown, title: "Men's Grooming", description: "Scissor cuts, precision fades, straight razor shaves with hot towel treatment, beard grooming, and more. Sharp looks for the modern gentleman.", tag: null, category: "cuts" as Category, image: "/images/mens-grooming.jpg" },
-  { icon: Flower2, title: "Braids & Installs", description: "Knotless braids, box braids, cornrows, wig installs, custom units, and extensions including hand-tied, sew-in, and tape-in options.", tag: null, category: "braids" as Category, image: "/images/braids-installs.jpg" },
-  { icon: Scissors, title: "Kids' Cuts", description: "Fresh, fun styles for little ones in a comfortable, friendly environment. We make sure your kids leave looking and feeling great.", tag: null, category: "cuts" as Category, image: "/images/kids-cuts.jpg" },
-  { icon: Heart, title: "Bridal Services", description: "Your dream wedding hair, perfected. In-salon or we travel to you. Trial runs, updos, blowouts, and styling for the entire bridal party.", tag: "Premium", category: "specialty" as Category, image: "/images/bridal-services.jpg" },
-  { icon: Waves, title: "Scalp Therapy Experience", description: "Luxe 1-hour scalp treatment featuring massage bed bliss, two nourishing hair masks, a refreshing facial, and a blowout of your choice.", tag: "Luxe", category: "specialty" as Category, image: "/images/scalp-therapy.jpg" },
-  { icon: Droplets, title: "Waxing Services", description: "Eyebrows, lips, chin, sideburns, and full face waxing. Professional waxing for smooth, clean results every time.", tag: null, category: "specialty" as Category, image: "/images/waxing-services.jpg" },
-  { icon: Palette, title: "Color Corrections", description: "Expert color correction services to fix unwanted tones, banding, or damage from previous color treatments. We'll get you where you want to be.", tag: null, category: "color" as Category, image: "/images/color-corrections.jpg" },
+  { icon: Scissors, title: "The Camacho Curly Cut", description: "Our signature dry-and-wet technique, designed for every curl type. Precision cutting that honors your natural pattern for defined shape, effortless volume, and beautiful movement.", tag: "Signature", category: "cuts" as Category, image: "/images/stylist-1.jpg" },
+  { icon: Palette, title: "Balayage & Highlights", description: "Hand-painted, sun-kissed highlights customized for your complexion and style. Natural, dimensional color with seamless grow-out — the kind of color people can't stop complimenting.", tag: "Popular", category: "color" as Category, image: "/images/stylist-2.jpg" },
+  { icon: Sparkles, title: "Blonding Services", description: "From icy platinum to warm, lived-in blondes and everything in between. Our colorists deliver stunning results while preserving hair health and integrity.", tag: null, category: "color" as Category, image: "/images/stylist-3.jpg" },
+  { icon: Crown, title: "Men's Grooming", description: "Precision scissor cuts, clean fades, straight razor shaves with a hot towel treatment, and expert beard design. Refined grooming for the modern gentleman.", tag: null, category: "cuts" as Category, image: "/images/mens-grooming.jpg" },
+  { icon: Flower2, title: "Braids & Installs", description: "Knotless braids, box braids, cornrows, custom wig installs, and professional extensions — including hand-tied, sew-in, and tape-in applications.", tag: null, category: "braids" as Category, image: "/images/braids-installs.jpg" },
+  { icon: Scissors, title: "Kids' Cuts", description: "Fun, fresh styles for your little ones in a comfortable, kid-friendly environment. We make sure every child leaves the chair looking great and feeling confident.", tag: null, category: "cuts" as Category, image: "/images/kids-cuts.jpg" },
+  { icon: Heart, title: "Bridal Services", description: "Flawless wedding day hair, perfected down to the last detail. In-salon or on location at your venue. Trial consultations, elegant updos, blowouts, and full bridal party styling.", tag: "Premium", category: "specialty" as Category, image: "/images/bridal-services.jpg" },
+  { icon: Waves, title: "Scalp Therapy Experience", description: "A luxurious one-hour scalp treatment — featuring massage bed relaxation, two nourishing hair masks, a refreshing facial, and a blowout of your choice. Pure indulgence.", tag: "Luxe", category: "specialty" as Category, image: "/images/scalp-therapy.jpg" },
+  { icon: Droplets, title: "Waxing Services", description: "Professional waxing for brows, lips, chin, sideburns, and full face. Smooth, precise results with minimal discomfort — every time.", tag: null, category: "specialty" as Category, image: "/images/waxing-services.jpg" },
+  { icon: Palette, title: "Color Corrections", description: "Expert-level color correction to resolve unwanted tones, banding, or damage from previous treatments. We'll restore your hair and get you exactly where you want to be.", tag: null, category: "color" as Category, image: "/images/color-corrections.jpg" },
 ];
 
 const categories = [
@@ -49,7 +49,7 @@ export default function Services() {
           <motion.h1 variants={fadeUp} custom={1} className="text-5xl md:text-7xl font-serif text-white mb-4" data-testid="text-services-title">
             Our <span className="italic">Services</span>
           </motion.h1>
-          <motion.p variants={fadeUp} custom={2} className="text-stone-300 text-lg">From cuts to color, braids to bridal &mdash; we do it all.</motion.p>
+          <motion.p variants={fadeUp} custom={2} className="text-stone-300 text-lg max-w-xl mx-auto">Expert cuts, stunning color, flawless braids, and luxury treatments — tailored to every hair type, texture, and vision.</motion.p>
         </motion.div>
       </section>
 
@@ -136,7 +136,7 @@ export default function Services() {
               Ready for Your<br /><span className="italic text-amber-200">Transformation?</span>
             </motion.h2>
             <motion.p variants={fadeUp} custom={2} className="text-stone-300 mb-8 text-lg max-w-xl mx-auto">
-              Whether you're here for a transformation or a touch-up, you'll leave feeling like your best self.
+              Whether you're looking for a bold transformation or a polished refresh, you'll leave looking and feeling like the best version of yourself.
             </motion.p>
             <motion.div variants={fadeUp} custom={3}>
               <a href="https://square.site/book/A0RGDZPMGHG28/hair-artistry-full-service-salon-cape-coral-fl" target="_blank" rel="noopener noreferrer">

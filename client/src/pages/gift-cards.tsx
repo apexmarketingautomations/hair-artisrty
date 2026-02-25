@@ -65,7 +65,7 @@ export default function GiftCards() {
     return (
       <div className="min-h-screen">
         <section className="relative py-24 px-4 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900" />
+          <div className="absolute inset-0 bg-gradient-to-br from-stone-900 via-rose-950/80 to-amber-900" />
           <div className="relative z-10 max-w-xl mx-auto text-center">
             <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", duration: 0.8 }}>
               <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
@@ -93,7 +93,7 @@ export default function GiftCards() {
   return (
     <div className="min-h-screen">
       <section className="relative py-24 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-stone-900 via-stone-800 to-amber-900" />
+        <div className="absolute inset-0 bg-gradient-to-br from-stone-900 via-rose-950/80 to-amber-900" />
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <motion.div initial="hidden" animate="visible">
             <motion.div variants={fadeUp} custom={0} className="inline-flex items-center gap-2 mb-4">
@@ -104,7 +104,7 @@ export default function GiftCards() {
               Give the Gift of<br /><span className="italic text-amber-200">Beauty</span>
             </motion.h1>
             <motion.p variants={fadeUp} custom={2} className="text-stone-300 text-lg max-w-xl mx-auto">
-              Perfect for birthdays, holidays, or just because. Redeemable for any service.
+              The perfect gift for birthdays, holidays, or any occasion. Redeemable for any service at Hair Artistry.
             </motion.p>
           </motion.div>
         </div>

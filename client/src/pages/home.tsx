@@ -41,7 +41,7 @@ export default function Home() {
           </motion.h1>
 
           <motion.p variants={fadeUp} custom={2} className="text-lg md:text-xl text-white/70 max-w-xl mx-auto mb-3" data-testid="text-hero-subtitle">
-            Where Beauty Meets Creativity
+            Cape Coral's Premier Full Service Salon
           </motion.p>
 
           <motion.div variants={fadeUp} custom={3} className="flex items-center justify-center gap-3 text-white/50 text-sm mb-10">
@@ -75,28 +75,28 @@ export default function Home() {
               More Than a Salon &mdash;<br />We're <span className="italic">Family</span>
             </motion.h2>
             <motion.p variants={fadeUp} custom={2} className="text-muted-foreground max-w-2xl mx-auto text-base leading-relaxed" data-testid="text-welcome-body">
-              At Hair Artistry, our team is a powerhouse of skilled and passionate stylists who specialize in 
-              everything from curls to color, cuts to custom installs and wigs, and everything in between.
+              At Hair Artistry, every artist on our team brings specialized expertise — from curly hair mastery and precision color 
+              to braids, custom wig installs, and men's grooming. Whatever your vision, we have the skills to make it happen.
             </motion.p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={stagger} className="grid md:grid-cols-3 gap-6">
             <ServiceShowcase
               image="/images/stylist-1.jpg"
-              title="Hair Cutting"
-              description="From precision cuts to the signature Camacho Curly Cut, your transformation starts here."
+              title="Precision Cutting"
+              description="From the signature Camacho Curly Cut to precision fades, your transformation starts here."
               index={0}
             />
             <ServiceShowcase
               image="/images/stylist-2.jpg"
-              title="Hair Coloring"
-              description="Balayage, blonding, creative color, and corrections. Dare to be bold."
+              title="Expert Color"
+              description="Balayage, blonding, creative color, and expert corrections. Dimensional, head-turning results."
               index={1}
             />
             <ServiceShowcase
               image="/images/stylist-3.jpg"
-              title="Styling & Beyond"
-              description="Braids, extensions, bridal, scalp therapy, and so much more."
+              title="Styling & Specialty"
+              description="Braids, extensions, bridal styling, scalp therapy, and luxury treatments — tailored to you."
               index={2}
             />
           </motion.div>

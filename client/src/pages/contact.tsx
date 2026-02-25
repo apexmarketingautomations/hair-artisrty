@@ -60,7 +60,7 @@ export default function Contact() {
           <motion.h1 variants={fadeUp} custom={1} className="text-5xl md:text-7xl font-serif text-white mb-4" data-testid="text-contact-title">
             Contact <span className="italic">Us</span>
           </motion.h1>
-          <motion.p variants={fadeUp} custom={2} className="text-stone-300 text-lg">We'd love to hear from you</motion.p>
+          <motion.p variants={fadeUp} custom={2} className="text-stone-300 text-lg max-w-xl mx-auto">Have a question or ready to book? Reach out — we'd love to hear from you.</motion.p>
         </motion.div>
       </section>
 
