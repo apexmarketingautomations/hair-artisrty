@@ -11,6 +11,50 @@ interface ChatMessage {
   content: string;
 }
 
+function ChatMessageContent({ content, isUser }: { content: string; isUser: boolean }) {
+  const parts = content.split(/(\[.*?\]\(.*?\)|https?:\/\/[^\s)]+)/g);
+
+  return (
+    <span>
+      {parts.map((part, i) => {
+        const mdMatch = part.match(/^\[(.*?)\]\((.*?)\)$/);
+        if (mdMatch) {
+          return (
+            <a
+              key={i}
+              href={mdMatch[2]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`underline font-medium ${isUser ? "text-primary-foreground" : "text-primary"}`}
+              data-testid={`link-chat-${i}`}
+            >
+              {mdMatch[1]}
+            </a>
+          );
+        }
+
+        if (/^https?:\/\/[^\s)]+$/.test(part)) {
+          const label = part.length > 40 ? part.slice(0, 37) + "..." : part;
+          return (
+            <a
+              key={i}
+              href={part}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`underline font-medium break-all ${isUser ? "text-primary-foreground" : "text-primary"}`}
+              data-testid={`link-chat-${i}`}
+            >
+              {label}
+            </a>
+          );
+        }
+
+        return <span key={i}>{part}</span>;
+      })}
+    </span>
+  );
+}
+
 export function AiChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -196,7 +240,9 @@ export function AiChatWidget() {
                       : "bg-card border border-border"
                   }`}
                 >
-                  {msg.content || (
+                  {msg.content ? (
+                    <ChatMessageContent content={msg.content} isUser={msg.role === "user"} />
+                  ) : (
                     <div className="flex items-center gap-1">
                       <Loader2 className="w-3 h-3 animate-spin" />
                       <span className="text-xs text-muted-foreground">Thinking...</span>
