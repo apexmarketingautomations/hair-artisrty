@@ -15,6 +15,8 @@ import GiftCards from "@/pages/gift-cards";
 import Referrals from "@/pages/referrals";
 import Shop from "@/pages/shop";
 import Memberships from "@/pages/memberships";
+import Gallery from "@/pages/gallery";
+import AdminGallery from "@/pages/admin-gallery";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -28,6 +30,8 @@ function Router() {
       <Route path="/referrals" component={Referrals} />
       <Route path="/shop" component={Shop} />
       <Route path="/memberships" component={Memberships} />
+      <Route path="/gallery" component={Gallery} />
+      <Route path="/admin/gallery" component={AdminGallery} />
       <Route component={NotFound} />
     </Switch>
   );

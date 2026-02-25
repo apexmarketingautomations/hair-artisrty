@@ -1,12 +1,13 @@
 import { db } from "./db";
 import {
-  conversations, messages, contactSubmissions, newsletterSubscribers, giftCards, reviews, referrals, memberships,
+  conversations, messages, contactSubmissions, newsletterSubscribers, giftCards, reviews, referrals, memberships, galleryItems,
   type InsertContact, type ContactSubmission, type Conversation, type Message,
   type InsertNewsletter, type NewsletterSubscriber,
   type InsertGiftCard, type GiftCard,
   type InsertReview, type Review,
   type InsertReferral, type Referral,
   type InsertMembership, type Membership,
+  type InsertGalleryItem, type GalleryItem,
 } from "@shared/schema";
 import { eq, desc } from "drizzle-orm";
 import { randomBytes } from "crypto";
@@ -29,6 +30,11 @@ export interface IStorage {
   getReferralByCode(code: string): Promise<Referral | undefined>;
   redeemReferral(code: string, referredEmail: string, referredName: string): Promise<Referral | undefined>;
   createMembership(data: InsertMembership): Promise<Membership>;
+  getAllGalleryItems(): Promise<GalleryItem[]>;
+  getGalleryItemsByCategory(category: string): Promise<GalleryItem[]>;
+  createGalleryItem(data: InsertGalleryItem): Promise<GalleryItem>;
+  updateGalleryItem(id: number, data: Partial<InsertGalleryItem>): Promise<GalleryItem | undefined>;
+  deleteGalleryItem(id: number): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -113,6 +119,23 @@ export class DatabaseStorage implements IStorage {
   async createMembership(data: InsertMembership) {
     const [m] = await db.insert(memberships).values(data).returning();
     return m;
+  }
+  async getAllGalleryItems() {
+    return db.select().from(galleryItems).orderBy(desc(galleryItems.featured), galleryItems.sortOrder, desc(galleryItems.createdAt));
+  }
+  async getGalleryItemsByCategory(category: string) {
+    return db.select().from(galleryItems).where(eq(galleryItems.category, category)).orderBy(desc(galleryItems.featured), galleryItems.sortOrder, desc(galleryItems.createdAt));
+  }
+  async createGalleryItem(data: InsertGalleryItem) {
+    const [g] = await db.insert(galleryItems).values(data).returning();
+    return g;
+  }
+  async updateGalleryItem(id: number, data: Partial<InsertGalleryItem>) {
+    const [g] = await db.update(galleryItems).set(data).where(eq(galleryItems.id, id)).returning();
+    return g;
+  }
+  async deleteGalleryItem(id: number) {
+    await db.delete(galleryItems).where(eq(galleryItems.id, id));
   }
 }
 

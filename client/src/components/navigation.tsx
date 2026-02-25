@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Scissors, Gift, ShoppingBag, Crown, Users } from "lucide-react";
+import { Menu, Scissors, Gift, ShoppingBag, Crown, Users, Camera } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Shop", href: "/shop" },
   { label: "Memberships", href: "/memberships" },
   { label: "Gift Cards", href: "/gift-cards" },
@@ -82,6 +83,7 @@ export function Navigation() {
                     }`}
                     data-testid={`link-mobile-${item.label.toLowerCase().replace(" ", "-")}`}
                   >
+                    {item.label === "Gallery" && <Camera className="w-4 h-4 inline mr-2" />}
                     {item.label === "Gift Cards" && <Gift className="w-4 h-4 inline mr-2" />}
                     {item.label === "Shop" && <ShoppingBag className="w-4 h-4 inline mr-2" />}
                     {item.label === "Memberships" && <Crown className="w-4 h-4 inline mr-2" />}

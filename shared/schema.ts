@@ -159,3 +159,24 @@ export const insertMembershipSchema = createInsertSchema(memberships).omit({
 
 export type Membership = typeof memberships.$inferSelect;
 export type InsertMembership = z.infer<typeof insertMembershipSchema>;
+
+export const galleryItems = pgTable("gallery_items", {
+  id: serial("id").primaryKey(),
+  type: text("type").notNull(),
+  title: text("title").notNull(),
+  description: text("description"),
+  url: text("url").notNull(),
+  thumbnail: text("thumbnail"),
+  category: text("category").default("general").notNull(),
+  featured: boolean("featured").default(false).notNull(),
+  sortOrder: integer("sort_order").default(0).notNull(),
+  createdAt: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`).notNull(),
+});
+
+export const insertGalleryItemSchema = createInsertSchema(galleryItems).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type GalleryItem = typeof galleryItems.$inferSelect;
+export type InsertGalleryItem = z.infer<typeof insertGalleryItemSchema>;

@@ -12,17 +12,19 @@ A cutting-edge 2026 demo clone of hairartistrysalon.biz (Hair Artistry Full Serv
 
 ## Pages
 - **/** - Home: full-screen hero with real salon image, service showcases, specialties grid, Google Reviews carousel (4.9 stars), gift card CTA, newsletter signup
-- **/about** - About: story, real images, values cards, $10 new client offer
+- **/about** - About: founder spotlight (Nakisha ShhmoneyCurl Camacho), Dream Team member cards with contact info, values section, $10 new client offer
 - **/services** - Services: filterable categories (cuts, color, braids, specialty), real images, service upsell add-ons section
 - **/gift-cards** - Gift Cards: amount selection, recipient form, code generation (no Stripe - payment at salon)
 - **/contact** - Contact: info cards, social links, contact form
 - **/referrals** - Referral Program: how it works, referral code generation form, $10 off for both referrer and friend
 - **/shop** - Product Shop: category-filtered product grid (8 products), gradient placeholder images, affiliate-ready "Shop Now" links
 - **/memberships** - Membership Plans: 3 tiers (Essential $59, Premium $99, VIP $149), signup form, FAQ accordion
+- **/gallery** - Public Gallery: filterable grid (photos, videos, links), lightbox viewer, video embeds (YouTube/Instagram/TikTok), empty state messaging
+- **/admin/gallery** - Admin Content Manager: add/edit/delete gallery items, image upload (base64) or URL, video URL support, category/sort/featured controls
 
 ## Features
 - AI chat widget on all pages (GPT-4o streaming via SSE)
-- Real salon images (hero-salon.jpg, stylist-1/2/3.jpg + 7 stock images in client/public/images/)
+- Real salon images (hero-salon.jpg, stylist-1/2/3.jpg + 7 stock images + team photos in client/public/images/)
 - Framer Motion scroll animations on all pages
 - Newsletter email signup with duplicate detection
 - E-Gift card creation with unique codes (HA-XXXXXXXX format)

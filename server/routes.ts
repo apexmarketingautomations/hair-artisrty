@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactSchema, insertNewsletterSchema, insertGiftCardSchema, insertReviewSchema, insertReferralSchema, insertMembershipSchema } from "@shared/schema";
+import { insertContactSchema, insertNewsletterSchema, insertGiftCardSchema, insertReviewSchema, insertReferralSchema, insertMembershipSchema, insertGalleryItemSchema } from "@shared/schema";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -155,6 +155,50 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
       res.status(201).json(membership);
     } catch (error) {
       res.status(500).json({ error: "Failed to create membership" });
+    }
+  });
+
+  app.get("/api/gallery", async (req, res) => {
+    try {
+      const category = req.query.category as string | undefined;
+      const items = category && category !== "all"
+        ? await storage.getGalleryItemsByCategory(category)
+        : await storage.getAllGalleryItems();
+      res.json(items);
+    } catch {
+      res.status(500).json({ error: "Failed to fetch gallery items" });
+    }
+  });
+
+  app.post("/api/gallery", async (req, res) => {
+    try {
+      const parsed = insertGalleryItemSchema.safeParse(req.body);
+      if (!parsed.success) return res.status(400).json({ error: "Invalid gallery data", details: parsed.error.issues });
+      const item = await storage.createGalleryItem(parsed.data);
+      res.status(201).json(item);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to create gallery item" });
+    }
+  });
+
+  app.patch("/api/gallery/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const item = await storage.updateGalleryItem(id, req.body);
+      if (!item) return res.status(404).json({ error: "Item not found" });
+      res.json(item);
+    } catch {
+      res.status(500).json({ error: "Failed to update gallery item" });
+    }
+  });
+
+  app.delete("/api/gallery/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      await storage.deleteGalleryItem(id);
+      res.status(204).end();
+    } catch {
+      res.status(500).json({ error: "Failed to delete gallery item" });
     }
   });
 

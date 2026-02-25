@@ -32,6 +32,7 @@ export function Footer() {
                 { label: "Home", href: "/" },
                 { label: "About", href: "/about" },
                 { label: "Services", href: "/services" },
+                { label: "Gallery", href: "/gallery" },
                 { label: "Shop", href: "/shop" },
                 { label: "Memberships", href: "/memberships" },
                 { label: "Gift Cards", href: "/gift-cards" },
