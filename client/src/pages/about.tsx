@@ -70,7 +70,6 @@ const teamMembers = [
     instagram: null,
     gradient: "from-red-500 to-rose-600",
     image: "/images/team-kaylee.jpg",
-    bio: "With years of mastery across every dimension of men's grooming, Kaylee brings an elite-level skillset to Hair Artistry. Trained in classic barbering foundations and modern technique, she is equally at home executing razor-sharp skin fades, textured crops, and intricate hair designs as she is crafting sculpted beards, precision lineups, and hot-towel straight-razor finishes. Her deep understanding of hair types, growth patterns, and facial structure means every cut is tailored — never templated. Clients trust Kaylee for her meticulous attention to detail, steady hand, and ability to translate any vision into a flawless result. Whether it's a bold transformation or a clean maintenance cut, she delivers consistency and artistry every time.",
   },
 ];
 
