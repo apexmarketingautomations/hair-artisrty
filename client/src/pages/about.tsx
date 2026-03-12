@@ -61,6 +61,17 @@ const teamMembers = [
     gradient: "from-amber-400 to-orange-500",
     image: "/images/team-member-8.jpg",
   },
+  {
+    name: "Kaylee",
+    aka: null,
+    role: "Master Barber",
+    specialties: ["Precision Fades", "Skin Fades", "Beard Sculpting", "Hair Design", "Razor Work", "Men's Styling"],
+    phone: null,
+    instagram: null,
+    gradient: "from-red-500 to-rose-600",
+    image: "/images/team-kaylee.jpg",
+    bio: "With years of mastery across every dimension of men's grooming, Kaylee brings an elite-level skillset to Hair Artistry. Trained in classic barbering foundations and modern technique, she is equally at home executing razor-sharp skin fades, textured crops, and intricate hair designs as she is crafting sculpted beards, precision lineups, and hot-towel straight-razor finishes. Her deep understanding of hair types, growth patterns, and facial structure means every cut is tailored — never templated. Clients trust Kaylee for her meticulous attention to detail, steady hand, and ability to translate any vision into a flawless result. Whether it's a bold transformation or a clean maintenance cut, she delivers consistency and artistry every time.",
+  },
 ];
 
 export default function About() {
@@ -179,10 +190,16 @@ export default function About() {
                     ))}
                   </div>
 
+                  {"bio" in member && member.bio && (
+                    <p className="text-muted-foreground text-xs leading-relaxed mb-4" data-testid={`text-team-bio-${i}`}>{member.bio}</p>
+                  )}
+
                   <div className="flex items-center gap-3 pt-3 border-t border-border">
-                    <a href={`tel:${member.phone.replace(/[^0-9]/g, "")}`} className="inline-flex items-center gap-1.5 text-sm text-primary font-medium" data-testid={`link-team-phone-${i}`}>
-                      <Phone className="w-3.5 h-3.5" /> {member.phone}
-                    </a>
+                    {member.phone && (
+                      <a href={`tel:${member.phone.replace(/[^0-9]/g, "")}`} className="inline-flex items-center gap-1.5 text-sm text-primary font-medium" data-testid={`link-team-phone-${i}`}>
+                        <Phone className="w-3.5 h-3.5" /> {member.phone}
+                      </a>
+                    )}
                     {member.instagram && (
                       <a href={`https://www.instagram.com/${member.instagram}`} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid={`link-team-instagram-${i}`}>
                         <SiInstagram className="w-4 h-4" />
