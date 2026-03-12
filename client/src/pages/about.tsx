@@ -66,7 +66,7 @@ const teamMembers = [
     aka: null,
     role: "Master Barber",
     specialties: ["Precision Fades", "Skin Fades", "Beard Sculpting", "Hair Design", "Razor Work", "Men's Styling"],
-    phone: null,
+    phone: "(239) 699-3321",
     instagram: null,
     gradient: "from-red-500 to-rose-600",
     image: "/images/team-kaylee.jpg",
