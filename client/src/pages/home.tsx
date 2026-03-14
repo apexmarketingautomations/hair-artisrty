@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Scissors, Palette, Sparkles, ArrowRight, Star, Gift, ChevronRight, Zap, Crown, Waves, ExternalLink } from "lucide-react";
+import GallerySection from "@/components/gallery-section";
 import type { Review } from "@shared/schema";
 
 const fadeUp = {
@@ -159,6 +160,8 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      <GallerySection />
 
       {reviews && reviews.length > 0 && (
         <section className="py-24 px-4">

@@ -1,0 +1,103 @@
+Act as a top 1% modern web designer, UX strategist, and front-end developer. Upgrade the Hair Artistry AI website to look and feel like a premium, high-converting salon brand instead of a basic template. The goal is to make the site feel more polished, more luxurious, more trustworthy, and more conversion-focused for local salon clients in Cape Coral.
+
+Use the current site as the foundation, but improve the visual hierarchy, typography, spacing, image presentation, section flow, and overall brand feel. Keep it elegant, feminine, modern, clean, and premium. The site should feel like a salon people trust with their appearance, not just another small business page.
+
+Make these content updates first:
+
+1. Team / About section
+
+* Add Kaylee to the team section.
+* Remove Jessie completely.
+* For Hayley, remove the word “Junior” and change her title to simply: Hair Artist.
+* Update the founder section so it says the founder has 13+ years of experience.
+* Change the founder photo to the updated one I provide.
+* Replace the current background image in that section with a better, more premium salon-related image that matches the brand.
+
+2. Services updates
+
+* Add or update a service for Scalp Treatment starting at $85.
+* Remove any mention of Olaplex.
+* Replace Olaplex with Agave Smoothing Treatment everywhere it appears.
+
+3. Gallery / image improvements
+
+* Add the new uploaded photos into the website so the same images are not repeated over and over.
+* Build a cleaner, more premium gallery section using the uploaded images.
+* Make sure the site rotates in more real salon photos and does not keep reusing the same visuals.
+* Use image layouts that look intentional and high-end, not random.
+
+Now upgrade the design and user experience overall:
+
+4. Homepage upgrade
+
+* Improve the hero section so it instantly communicates luxury, professionalism, and transformation.
+* Make the call-to-action stronger so users are pushed toward booking.
+* Keep “Book Now” prominent and make sure it stands out visually.
+* Improve headline/subheadline copy if needed so it sounds more polished and premium.
+
+5. Visual design direction
+
+* Use a more elevated salon aesthetic:
+
+  * warm neutrals
+  * soft luxury tones
+  * clean white space
+  * elegant typography
+  * subtle shadows
+  * smooth section transitions
+  * refined button styling
+* Make the site feel expensive without being overdesigned.
+* Do not make it cheesy, cluttered, or gimmicky.
+
+6. Conversion improvements
+
+* Make the site better at turning visitors into bookings.
+* Improve section order if needed so the flow makes more psychological sense:
+  trust first, then services, then proof, then team, then booking.
+* Add stronger credibility cues like experience, professionalism, and visible service quality.
+* Make sure mobile view is just as clean and strong as desktop.
+
+7. About / team section quality
+
+* Each stylist/team card should look consistent, professional, and visually clean.
+* Prioritize:
+
+  * name
+  * title
+  * specialties
+  * phone number if applicable
+  * polished photo presentation
+* Avoid bulky paragraphs unless they actually help conversion.
+
+8. Services section quality
+
+* Redesign the services area so it feels more premium and easier to scan.
+* Group services clearly.
+* Highlight signature or specialty services where appropriate.
+* Make pricing presentation cleaner and more upscale.
+
+9. Technical expectations
+
+* Keep everything responsive across desktop, tablet, and mobile.
+* Maintain fast loading speed.
+* Optimize uploaded images properly.
+* Keep the code clean and production-ready.
+* Do not break existing booking functionality or current site structure unless replacing it with something better.
+
+10. Final standard
+    I do not want a lazy patch job. I want the site upgraded like a serious salon brand that could compete visually with top modern beauty websites. Every section should feel more intentional, better designed, and more persuasive.
+
+After making the updates:
+
+* test the homepage
+* test mobile responsiveness
+* confirm all text replacements were completed
+* confirm Jessie was removed
+* confirm Kaylee was added
+* confirm Hayley’s title was updated
+* confirm Olaplex was replaced with Agave Smoothing Treatment
+* confirm Scalp Treatment starting at $85 was added
+* confirm new images were added and repeated images were reduced
+* republish the site
+
+Do not ask vague questions unless absolutely necessary. Use the uploaded assets and make strong design decisions like an elite web designer.
