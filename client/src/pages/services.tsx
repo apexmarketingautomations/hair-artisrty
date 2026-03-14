@@ -13,9 +13,9 @@ const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 type Category = "all" | "cuts" | "color" | "braids" | "specialty";
 
 const services = [
-  { icon: Scissors, title: "The Camacho Curly Cut", description: "Our signature dry-and-wet technique, designed for every curl type. Precision cutting that honors your natural pattern for defined shape, effortless volume, and beautiful movement.", tag: "Signature", category: "cuts" as Category, image: "/images/stylist-1.jpg" },
-  { icon: Palette, title: "Balayage & Highlights", description: "Hand-painted, sun-kissed highlights customized for your complexion and style. Natural, dimensional color with seamless grow-out — the kind of color people can't stop complimenting.", tag: "Popular", category: "color" as Category, image: "/images/stylist-2.jpg" },
-  { icon: Sparkles, title: "Blonding Services", description: "From icy platinum to warm, lived-in blondes and everything in between. Our colorists deliver stunning results while preserving hair health and integrity.", tag: null, category: "color" as Category, image: "/images/stylist-3.jpg" },
+  { icon: Scissors, title: "The Camacho Curly Cut", description: "Our signature dry-and-wet technique, designed for every curl type. Precision cutting that honors your natural pattern for defined shape, effortless volume, and beautiful movement.", tag: "Signature", category: "cuts" as Category, image: "/images/work/work-08.jpg" },
+  { icon: Palette, title: "Balayage & Highlights", description: "Hand-painted, sun-kissed highlights customized for your complexion and style. Natural, dimensional color with seamless grow-out — the kind of color people can't stop complimenting.", tag: "Popular", category: "color" as Category, image: "/images/work/work-11.jpg" },
+  { icon: Sparkles, title: "Blonding Services", description: "From icy platinum to warm, lived-in blondes and everything in between. Our colorists deliver stunning results while preserving hair health and integrity.", tag: null, category: "color" as Category, image: "/images/work/work-14.jpg" },
   { icon: Crown, title: "Men's Grooming", description: "Precision scissor cuts, clean fades, straight razor shaves with a hot towel treatment, and expert beard design. Refined grooming for the modern gentleman.", tag: null, category: "cuts" as Category, image: "/images/mens-grooming.jpg" },
   { icon: Flower2, title: "Braids & Installs", description: "Knotless braids, box braids, cornrows, custom wig installs, and professional extensions — including hand-tied, sew-in, and tape-in applications.", tag: null, category: "braids" as Category, image: "/images/braids-installs.jpg" },
   { icon: Scissors, title: "Kids' Cuts", description: "Fun, fresh styles for your little ones in a comfortable, kid-friendly environment. We make sure every child leaves the chair looking great and feeling confident.", tag: null, category: "cuts" as Category, image: "/images/kids-cuts.jpg" },
@@ -41,7 +41,7 @@ export default function Services() {
     <div className="min-h-screen">
       <section className="relative py-32 px-4 overflow-hidden">
         <div className="absolute inset-0">
-          <img src="/images/hero-salon.jpg" alt="Salon" className="w-full h-full object-cover" />
+          <img src="/images/work/work-03.jpg" alt="Salon services" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         </div>
         <motion.div initial="hidden" animate="visible" variants={stagger} className="relative z-10 max-w-4xl mx-auto text-center">

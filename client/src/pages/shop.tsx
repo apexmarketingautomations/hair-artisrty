@@ -108,7 +108,7 @@ export default function Shop() {
     <div className="min-h-screen">
       <section className="relative py-32 px-4 overflow-hidden">
         <div className="absolute inset-0">
-          <img src="/images/hero-salon.jpg" alt="Salon" className="w-full h-full object-cover" />
+          <img src="/images/work/work-13.jpg" alt="Hair products" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-br from-violet-900/70 via-rose-900/50 to-amber-900/70" />
         </div>
         <motion.div initial="hidden" animate="visible" variants={stagger} className="relative z-10 max-w-4xl mx-auto text-center">
