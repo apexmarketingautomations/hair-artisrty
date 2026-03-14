@@ -83,19 +83,19 @@ export default function Home() {
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={stagger} className="grid md:grid-cols-3 gap-6">
             <ServiceShowcase
-              image="/images/work/work-02.jpg"
+              image="/images/stylist-1.jpg"
               title="Precision Cutting"
               description="From the signature Camacho Curly Cut to precision fades, your transformation starts here."
               index={0}
             />
             <ServiceShowcase
-              image="/images/work/work-05.jpg"
+              image="/images/stylist-2.jpg"
               title="Expert Color"
               description="Balayage, blonding, creative color, and expert corrections. Dimensional, head-turning results."
               index={1}
             />
             <ServiceShowcase
-              image="/images/work/work-09.jpg"
+              image="/images/stylist-3.jpg"
               title="Styling & Specialty"
               description="Braids, extensions, bridal styling, scalp therapy, and luxury treatments — tailored to you."
               index={2}
@@ -145,15 +145,15 @@ export default function Home() {
             <motion.div variants={fadeUp} custom={2} className="relative">
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-3">
-                  <img src="/images/work/work-01.jpg" alt="Curly cut transformation" className="w-full rounded-md object-cover aspect-[3/4]" />
+                  <img src="/images/stylist-1.jpg" alt="Hair styling" className="w-full rounded-md object-cover aspect-[3/4]" />
                   <div className="p-4 rounded-md bg-primary text-primary-foreground">
                     <p className="font-serif text-2xl font-bold">$10</p>
                     <p className="text-xs text-primary-foreground/80">Off your first visit</p>
                   </div>
                 </div>
                 <div className="space-y-3 pt-8">
-                  <img src="/images/work/work-06.jpg" alt="Color artistry" className="w-full rounded-md object-cover aspect-[3/4]" />
-                  <img src="/images/work/work-10.jpg" alt="Styling result" className="w-full rounded-md object-cover aspect-square" />
+                  <img src="/images/stylist-2.jpg" alt="Hair coloring" className="w-full rounded-md object-cover aspect-[3/4]" />
+                  <img src="/images/stylist-3.jpg" alt="Hair artistry" className="w-full rounded-md object-cover aspect-square" />
                 </div>
               </div>
             </motion.div>
