@@ -75,7 +75,13 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     ) {
       req.session.adminAuth = true;
       req.session.adminName = "Nakisha";
-      res.json({ success: true, name: "Nakisha" });
+      req.session.save((err) => {
+        if (err) {
+          console.error("Session save error:", err);
+          return res.status(500).json({ error: "Session error" });
+        }
+        res.json({ success: true, name: "Nakisha" });
+      });
     } else {
       res.status(401).json({ error: "Invalid credentials" });
     }
