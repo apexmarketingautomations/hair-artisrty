@@ -32,16 +32,6 @@ const teamMembers = [
     image: "/images/team-member-4.jpg",
   },
   {
-    name: "Jessie",
-    aka: null,
-    role: "Senior Artist & Barber",
-    specialties: ["Barbering", "Scissor Cuts", "Styling", "Hot Towel Shaves"],
-    phone: "(239) 244-6902",
-    instagram: null,
-    gradient: "from-rose-500 to-pink-500",
-    image: "/images/team-member-9.jpg",
-  },
-  {
     name: "Jenae",
     aka: null,
     role: "Senior Artist & Braider",
