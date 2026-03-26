@@ -165,7 +165,6 @@ export default function About() {
                 <div className={`h-1.5 bg-gradient-to-r ${member.gradient}`} />
                 <div className="p-6">
                   <div className="flex items-start gap-4 mb-4">
-                    <img src={member.image} alt={member.name} className="shrink-0 w-14 h-14 rounded-full object-cover object-top border-2 border-border" />
                     <div className="min-w-0">
                       <h3 className="font-serif text-lg leading-tight">{member.name}</h3>
                       {member.aka && <p className="text-primary text-xs font-semibold">"{member.aka}"</p>}
