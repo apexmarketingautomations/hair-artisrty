@@ -12,6 +12,7 @@ export default function EmailPopup() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   useEffect(() => {
+    if (window.location.pathname.startsWith("/admin")) return;
     const dismissed = localStorage.getItem(STORAGE_KEY);
     if (dismissed) {
       const ts = parseInt(dismissed, 10);
