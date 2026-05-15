@@ -11,8 +11,8 @@ declare module "express-session" {
   }
 }
 
-const ADMIN_USERNAME = "nakisha";
-const ADMIN_PASSWORD = "HairArtistry2026!";
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME ?? "nakisha";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 function requireAdmin(req: Request, res: Response, next: NextFunction) {
   if (req.session?.adminAuth) {
@@ -63,9 +63,12 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
   await storage.seedReviews();
 
   app.post("/api/admin/login", (req, res) => {
+    if (!ADMIN_PASSWORD) {
+      return res.status(500).json({ error: "Server misconfiguration: ADMIN_PASSWORD not set" });
+    }
     const { username, password } = req.body;
     if (
-      username?.toLowerCase() === ADMIN_USERNAME &&
+      username?.toLowerCase() === ADMIN_USERNAME.toLowerCase() &&
       password === ADMIN_PASSWORD
     ) {
       req.session.adminAuth = true;
