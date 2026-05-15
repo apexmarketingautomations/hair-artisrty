@@ -5,10 +5,6 @@
  * At least one provider key must be set or the process will exit with a clear error.
  */
 
-import OpenAI from "openai";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import Anthropic from "@anthropic-ai/sdk";
-
 export type ProviderName = "gemini" | "anthropic" | "openai";
 
 export interface AIProvider {
@@ -24,11 +20,11 @@ export interface AIProvider {
 // Gemini provider
 // ---------------------------------------------------------------------------
 function createGeminiProvider(apiKey: string): AIProvider {
-  const genAI = new GoogleGenerativeAI(apiKey);
-
   return {
     name: "gemini",
     async *streamChat(systemPrompt, messages) {
+      const { GoogleGenerativeAI } = await import("@google/generative-ai");
+      const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({
         model: "gemini-1.5-flash",
         systemInstruction: systemPrompt,
@@ -56,11 +52,11 @@ function createGeminiProvider(apiKey: string): AIProvider {
 // Anthropic provider
 // ---------------------------------------------------------------------------
 function createAnthropicProvider(apiKey: string): AIProvider {
-  const client = new Anthropic({ apiKey });
-
   return {
     name: "anthropic",
     async *streamChat(systemPrompt, messages) {
+      const Anthropic = (await import("@anthropic-ai/sdk")).default;
+      const client = new Anthropic({ apiKey });
       const stream = await client.messages.stream({
         model: "claude-3-5-haiku-latest",
         max_tokens: 1024,
@@ -87,11 +83,11 @@ function createAnthropicProvider(apiKey: string): AIProvider {
 // OpenAI provider
 // ---------------------------------------------------------------------------
 function createOpenAIProvider(apiKey: string): AIProvider {
-  const client = new OpenAI({ apiKey });
-
   return {
     name: "openai",
     async *streamChat(systemPrompt, messages) {
+      const OpenAI = (await import("openai")).default;
+      const client = new OpenAI({ apiKey });
       const stream = await client.chat.completions.create({
         model: "gpt-4o",
         max_tokens: 1024,
