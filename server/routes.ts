@@ -2,7 +2,7 @@ import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema, insertNewsletterSchema, insertGiftCardSchema, insertReviewSchema, insertReferralSchema, insertMembershipSchema, insertGalleryItemSchema } from "@shared/schema";
-import OpenAI from "openai";
+import { getAIProvider } from "./ai-provider";
 
 declare module "express-session" {
   interface SessionData {
@@ -20,11 +20,6 @@ function requireAdmin(req: Request, res: Response, next: NextFunction) {
   }
   res.status(401).json({ error: "Unauthorized" });
 }
-
-const openai = new OpenAI({
-  apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
-  baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
-});
 
 const SALON_SYSTEM_PROMPT = `You are the AI concierge for Hair Artistry Full Service Salon, located at 909 SE 47th Terr, Cape Coral, FL 33904 #104. Phone: (239) 677-9902.
 
@@ -305,32 +300,19 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
 
       await storage.createMessage(conversationId, "user", content);
       const existingMessages = await storage.getMessagesByConversation(conversationId);
-      const chatHistory: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
-        { role: "system", content: SALON_SYSTEM_PROMPT },
-        ...existingMessages.map((m) => ({
-          role: m.role as "user" | "assistant",
-          content: m.content,
-        })),
-      ];
+      // Build history excluding the just-saved user message (provider appends it)
+      const chatHistory = existingMessages
+        .slice(0, -1)
+        .map((m) => ({ role: m.role as "user" | "assistant", content: m.content }));
 
       res.setHeader("Content-Type", "text/event-stream");
       res.setHeader("Cache-Control", "no-cache");
       res.setHeader("Connection", "keep-alive");
 
-      const stream = await openai.chat.completions.create({
-        model: "gpt-4o",
-        messages: chatHistory,
-        stream: true,
-        max_tokens: 1024,
-      });
-
       let fullResponse = "";
-      for await (const chunk of stream) {
-        const c = chunk.choices[0]?.delta?.content || "";
-        if (c) {
-          fullResponse += c;
-          res.write(`data: ${JSON.stringify({ content: c })}\n\n`);
-        }
+      for await (const chunk of getAIProvider().streamChat(SALON_SYSTEM_PROMPT, chatHistory, content)) {
+        fullResponse += chunk;
+        res.write(`data: ${JSON.stringify({ content: chunk })}\n\n`);
       }
 
       await storage.createMessage(conversationId, "assistant", fullResponse);
